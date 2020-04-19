@@ -66,7 +66,7 @@ def resizeImage(image, max_size):
 def refreshImage(image):
 	#refreshes the image by saving it and running imread again
 	#this often fixes a number of errors caused when running multiple transforms back to back
-	tempname = mkstemp(suffix=".png")[1]
+	tempname = tempfile.mkstemp(suffix=".png")[1]
 	cv2.imwrite(tempname, image)
 	image = cv2.imread(tempname)
 	os.remove(tempname)

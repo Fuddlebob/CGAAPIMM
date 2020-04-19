@@ -1,0 +1,8 @@
+{
+	"fb_token" : "Put your FB Token here",
+	"file_home" : "/path/to/home/directory/for/outfiles",
+	"state_file" : "pwwbState.txt",
+	"image_file" : "lastImage.png",
+	"backup_image" : "backup.png",
+	"initial_image" : "initial.png"
+}

@@ -3,7 +3,6 @@ from helper import *
 import cv2
 import numpy as np
 import random
-import requests
 import os
 import shutil
 

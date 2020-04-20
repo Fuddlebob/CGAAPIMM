@@ -19,12 +19,11 @@ class sectionTileTransform(abstractTransform.abstractTransformClass):
 	def transform(image):
 		#take in an openCV image and transform it, returning the new image
 		h, w = img_size(image)
-		size = random.randint(16, min(256, int(min(w, h)/4)))
-		print(size)
+		size = random.randint(16, min(128, int(min(w, h)/4)))
 		tileset_width = math.floor(w/size) - 1
 		tileset_height = math.floor(h/size) - 1
-		width = random.randint(45, 90)
-		height = random.randint(45, 90)			
+		width = random.randint(30, 60)
+		height = random.randint(30, 60)			
 		tilearr = make_arr(width, height)
 		divs = div_arr(tilearr)
 		divs = random_merge(divs)

@@ -2,6 +2,7 @@ from . import abstractTransform
 from helper import *
 import cv2
 import numpy as np
+import pathlib
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
 import random
@@ -20,10 +21,12 @@ class putTextTransform(abstractTransform.abstractTransformClass):
 		#take in an openCV image and transform it, returning the new image
 		text = randomText()
 		#save the image and use PIL instead because cv2 sucks for text stuff
+		path = str(pathlib.Path(__file__).parent.absolute()) + "/transformFiles/impact.ttf"
+		print(path)
 		cv2.imwrite("temp.png", image)
 		pim = Image.open("temp.png").convert("RGBA")
 		fontsize = random.randint(16, 400)
-		font = ImageFont.truetype("transformFiles/impact.ttf", fontsize)
+		font = ImageFont.truetype(path, fontsize)
 		width, height = pim.size
 		x1 = random.randint(0, width)
 		x2 = random.randint(0, width)

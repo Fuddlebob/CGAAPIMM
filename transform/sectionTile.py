@@ -19,9 +19,10 @@ class sectionTileTransform(abstractTransform.abstractTransformClass):
 	def transform(image):
 		#take in an openCV image and transform it, returning the new image
 		h, w = img_size(image)
-		size = random.randint(16, 256)
-		tileset_width = math.floor(w/size)
-		tileset_height = math.floor(h/size)
+		size = random.randint(16, min(256, int(min(w, h)/4)))
+		print(size)
+		tileset_width = math.floor(w/size) - 1
+		tileset_height = math.floor(h/size) - 1
 		width = random.randint(45, 90)
 		height = random.randint(45, 90)			
 		tilearr = make_arr(width, height)
@@ -31,24 +32,24 @@ class sectionTileTransform(abstractTransform.abstractTransformClass):
 		for i, d in enumerate(divs):
 			contents = random.randint(0, tileset_width * tileset_height)
 			tilearr = fill_div(tilearr, d, contents)
-		image = make_image(tilearr, size, pim)
+		image = make_image(tilearr, size, image)
 		return image
 		
 		
 
 def get_tile(tilenum, size, image):
 	h,w = img_size(image)
-
-	tileset_width = math.floor(w/size)
-	tileset_height = math.floor(h/size)
+	tileset_width = math.floor(w/size) - 1
+	tileset_height = math.floor(h/size) - 1
 	row = int(tilenum / tileset_width)
 	col = tilenum - (row * tileset_width)
 	if(row >= tileset_width or col >= tileset_height):
 		return get_tile(0, size, image)
 	left = col * size
 	upper = row * size
-	
-	return image[upper:upper+size,left:left+size]
+	new = image[upper:upper+size,left:left+size]
+
+	return new
 	
 	
 def div_arr(arr):
@@ -237,13 +238,15 @@ def fill_div(arr, box, num):
 def make_image(tilearr, size, image):
 	width = len(tilearr)
 	height = len(tilearr[0])
-	town = Image.new("RGB", (width * size, height * size))
+	newImage = np.zeros((height*size,width*size,3), np.uint8)
 	for i in range(width):
 		for j in range(height):
+			y = size * j
+			x = size * i
 			tile = get_tile(tilearr[i][j], size, image)
-			town.paste(tile, (size * i, size * j))
+			newImage[y:y+size, x:x+size] = tile
 	
-	return town
+	return newImage
 
 def make_arr(width, height):
 	arr = []

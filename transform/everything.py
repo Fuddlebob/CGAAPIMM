@@ -21,5 +21,5 @@ class everythingTransform(abstractTransform.abstractTransformClass):
 		for t in alltransforms:
 			if(not t.name() == "Everything"):
 				image = t.transform(image)
-				image = resizeImage(image, 2048)
+				image = resizeImage(image, 1024)
 		return image

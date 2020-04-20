@@ -30,7 +30,7 @@ INITIAL_IMAGE = FILE_HOME + cfg["initial_image"]
 restricted_transforms = [everything.everythingTransform]
 guaranteed_transforms = [addImage.addImageTransform, superimpose.superimposeTransform, drawShape.drawShapeTransform, putText.putTextTransform]
 
-MAX_SIZE = 2048
+MAX_SIZE = 1024
 
 
 def main():

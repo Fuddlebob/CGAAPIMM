@@ -1,4 +1,5 @@
 from . import abstractTransform
+from helper import *
 import cv2
 import numpy as np
 from PIL import Image
@@ -17,17 +18,12 @@ class sectionTileTransform(abstractTransform.abstractTransformClass):
 		
 	def transform(image):
 		#take in an openCV image and transform it, returning the new image
-		cv2.imwrite("temp.png", image)
-		pim = Image.open("temp.png")
-		w, h = pim.size
+		h, w = img_size(image)
 		size = random.randint(16, 256)
 		tileset_width = math.floor(w/size)
 		tileset_height = math.floor(h/size)
 		width = random.randint(45, 90)
-		height = random.randint(45, 90)
-		
-		
-		
+		height = random.randint(45, 90)			
 		tilearr = make_arr(width, height)
 		divs = div_arr(tilearr)
 		divs = random_merge(divs)
@@ -35,23 +31,14 @@ class sectionTileTransform(abstractTransform.abstractTransformClass):
 		for i, d in enumerate(divs):
 			contents = random.randint(0, tileset_width * tileset_height)
 			tilearr = fill_div(tilearr, d, contents)
-		pim = make_image(tilearr, size, pim)
-		pim.save("temp.png", "PNG")
-		image = cv2.imread("temp.png")
-		os.remove("temp.png")
+		image = make_image(tilearr, size, pim)
 		return image
 		
 		
 
-tile_cache = []
-
-
 def get_tile(tilenum, size, image):
-	w, h = image.size
+	h,w = img_size(image)
 
-	for t in tile_cache:
-		if (t[0] == tilenum):
-			return t[1]
 	tileset_width = math.floor(w/size)
 	tileset_height = math.floor(h/size)
 	row = int(tilenum / tileset_width)
@@ -60,11 +47,8 @@ def get_tile(tilenum, size, image):
 		return get_tile(0, size, image)
 	left = col * size
 	upper = row * size
-	box = (left, upper, left + size, upper + size)
-	im = image.crop(box)
-	tile_cache.append((tilenum, im))
 	
-	return im
+	return image[upper:upper+size,left:left+size]
 	
 	
 def div_arr(arr):

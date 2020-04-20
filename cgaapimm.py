@@ -91,7 +91,8 @@ def main():
 		#resize the image to keep it manageable
 		image = resizeImage(image, MAX_SIZE)
 		cv2.imwrite(LAST_IMAGE, image)
-	except:
+	except Exception as e:
+		print(e, file=sys.stderr)
 		error = True
 	
 	#choose 6 new transform options

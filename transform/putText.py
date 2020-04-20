@@ -22,7 +22,6 @@ class putTextTransform(abstractTransform.abstractTransformClass):
 		text = randomText()
 		#save the image and use PIL instead because cv2 sucks for text stuff
 		path = str(pathlib.Path(__file__).parent.absolute()) + "/transformFiles/impact.ttf"
-		print(path)
 		cv2.imwrite("temp.png", image)
 		pim = Image.open("temp.png").convert("RGBA")
 		fontsize = random.randint(16, 400)

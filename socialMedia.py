@@ -56,7 +56,15 @@ def fb_get_reacts(postId):
 			('fields', 'reactions.type('+r+').limit(0).summary(total_count)')
 		)
 		response = requests.get("https://graph.facebook.com/" + postId, params = params)
-		numR = (int) (eval(response.content)['reactions']['summary']['total_count'])
+		numR = 0
+		try:
+			numR = (int) (eval(response.content)['reactions']['summary']['total_count'])
+		except Exception e:
+			print("Error getting react " + r + ". Response from Facebook: ", file = sys.stderr)
+			print(response.content, file=sys.stderr)
+			print("Error message:", file = sys.stderr)
+			print(e, file=sys.stderr)
+			
 		results[r] = numR
 		
 	return results

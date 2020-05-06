@@ -1,5 +1,6 @@
 import requests
 import os
+import sys
 from requests_oauthlib import OAuth1
 import time
 
@@ -59,7 +60,7 @@ def fb_get_reacts(postId):
 		numR = 0
 		try:
 			numR = (int) (eval(response.content)['reactions']['summary']['total_count'])
-		except Exception e:
+		except Exception as e:
 			print("Error getting react " + r + ". Response from Facebook: ", file = sys.stderr)
 			print(response.content, file=sys.stderr)
 			print("Error message:", file = sys.stderr)

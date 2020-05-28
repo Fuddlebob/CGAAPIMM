@@ -35,7 +35,7 @@ def photo_to_facebook(filepath, message):
 	)	
 	response = requests.post(FACEBOOK_PHOTO_ENDPOINT_URL, params=params, files=files)
 	print(str(response.content))
-	return response.json()["id"]
+	return response.json()["post_id"]
 	
 #uploads a comment to a post given by postId, with message
 def fb_comment(postid, message):

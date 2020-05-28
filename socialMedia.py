@@ -23,7 +23,7 @@ def video_to_facebook(vidname, message):
 	)	
 	response = requests.post(FACEBOOK_VIDEO_ENDPOINT_URL, params=params, files=files)
 	print(str(response.content))
-	return response.json()["id"]
+	return response.json()["post_id"]
 	
 #uploads a photo to facebook and returns the id of the post
 def photo_to_facebook(filepath, message):

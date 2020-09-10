@@ -24,11 +24,17 @@ class addImageTransform(abstractTransform.abstractTransformClass):
 		h2, w2 = img_size(newImage)
 		flag = False
 		while(not flag):
-			thr = random.uniform(0.4, 0.8)
-			th = h1 * thr
-			tw = (th/h2) * w2
-			if(th <= h1 and tw <= w1):
-				flag = True
+			tar = random.uniform(0.4, 0.8)
+			if (h1 < w1):
+				th = h1 * tar
+				tw = (th/h2) * w2
+				if(th <= h1 and tw <= w1):
+					flag = True
+			else:
+				tw = w1 * tar
+				th = *t2/w2) * h2
+				if(th <= h1 and tw <= w1):
+					flag = True
 		h2 = int(th)
 		w2 = int(tw)
 		newImage = cv2.resize(newImage, (w2, h2), interpolation = cv2.INTER_AREA)

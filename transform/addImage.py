@@ -32,7 +32,7 @@ class addImageTransform(abstractTransform.abstractTransformClass):
 					flag = True
 			else:
 				tw = w1 * tar
-				th = (t2/w2) * h2
+				th = (tw/w2) * h2
 				if(th <= h1 and tw <= w1):
 					flag = True
 		h2 = int(th)

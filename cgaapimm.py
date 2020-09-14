@@ -34,6 +34,7 @@ MAX_SIZE = 1024
 
 
 def main():
+
 	if(not os.path.exists(STATE_FILE)):
 		#if there is no state file create an initial post
 		initialPost()
@@ -81,8 +82,9 @@ def main():
 	if (not ts):
 		print("Something went wrong, no transforms found with that name")
 		return
+	
 	used_t = random.choice(ts)
-	print(used_t.name())
+	print("Picked transform: " +str(used_t.name()))
 	
 	#try to apply the transform
 	error = False
@@ -187,4 +189,8 @@ def initialPost():
 			f.write(t.name() + '\n')
 
 if (__name__ == '__main__'):
+	print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+	print("Beginning execution.")
+	print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	main()
+	print("Execution Finished.")

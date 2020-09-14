@@ -16,6 +16,9 @@ class diagonalRollTransform(abstractTransform.abstractTransformClass):
 		#take in an openCV image and transform it, returning the new image
 		h, w, c = image.shape
 		mul = random.choice([-1, 1])
+		offset = random.randint(0, w)
+		slope = random.triangular(0.25, 4, 1)
 		for i in range(w):
-			image[:,i] = np.roll(image[:,i], int(i * h/w) * mul, axis = 0)
+			image[:,i] = np.roll(image[:,i], int((i + offset)* h/w  * slope) * mul, axis = 0)
+
 		return image
